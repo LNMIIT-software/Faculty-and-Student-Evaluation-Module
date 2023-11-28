@@ -7,6 +7,8 @@ import AdminHeader from './components/admin/AdminHeader.jsx'
 import Login from './components/Login.jsx'
 import { Provider } from 'react-redux'
 import store from './store/store.js'
+import AddStudent from './components/admin/AddStudents.jsx'
+import AddFaculty from './components/admin/AddFaculty.jsx'
 
 const router = createBrowserRouter([
   {
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
   {
     path: '/admin',
     element: <AdminHeader />
+  },
+  {
+    path: '/admin/add-student',
+    element: <AddStudent />
+  },
+  {
+    path: '/admin/add-faculty',
+    element: <AddFaculty />
   }
 ])
 

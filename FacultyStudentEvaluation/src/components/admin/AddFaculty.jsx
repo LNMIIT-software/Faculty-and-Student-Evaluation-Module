@@ -45,7 +45,7 @@ function AddFaculty(){
                             label = 'Name'
                             placeholder="Enter the faculty name"
                             type="text"
-                            {...register("name", {
+                            {...register("username", {
                                 required: true,
                             })}
                             />

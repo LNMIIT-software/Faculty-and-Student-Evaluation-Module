@@ -4,7 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     status: false,
     user: null,
-    userData: null
+    userData: null,
+    studentData: null,
 }
 
 const authSlice = createSlice({

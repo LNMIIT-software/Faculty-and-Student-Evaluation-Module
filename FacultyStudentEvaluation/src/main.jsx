@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import AddStudent from './components/admin/AddStudents.jsx'
 import AddFaculty from './components/admin/AddFaculty.jsx'
+import AddSubject from './components/admin/AddSubjects.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: '/admin/add-faculty',
     element: <AddFaculty />
+  },
+  {
+    path: '/admin/add-student/add-subject',
+    element: <AddSubject />
   }
 ])
 

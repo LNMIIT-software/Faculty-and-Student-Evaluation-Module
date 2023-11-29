@@ -5,23 +5,36 @@ import authService from "../../appwrite/auth";
 //import { login as authLogin } from "../../store/authSlice";
 import {Button, Input} from '../index'
 import { useForm } from 'react-hook-form'
+import { useSelector } from "react-redux";
+import authSlice from "../../store/authSlice";
 
 function AddStudent(){
     const navigate = useNavigate()
-//    const dispatch = useDispatch()
-    const {register, handleSubmit} = useForm()
+    const {register, handleSubmit, getValues} = useForm()
     const [error, setError] = useState('')
+    const [formData, setFormData] = useState({})
 
     const signup = async(data) => {
         console.log(data)
+        setFormData(data)
+        console.log("this is the formData")
+        console.log(formData)
         setError('')
         try {
             const session = await authService.createAccount(data)
             console.log("ye hai signup function")
             console.log(session)
+            
             if(session){
-                navigate('/admin')
+                navigate('/admin/add-student/add-subject', {state: formData})
             }
+            // try {
+            //     console.log({id, username, subject1, faculty1})
+            //     const entry = await service.addEntry({id, username, subject1, faculty1})
+            //     console.log(entry)
+            // } catch (error) {
+            //     setError(error.message)
+            // }
         } catch (error) {
             setError(error.message)
         }
@@ -49,7 +62,7 @@ function AddStudent(){
                             label = 'Name'
                             placeholder="Enter student name"
                             type="text"
-                            {...register("name", {
+                            {...register("username", {
                                 required: true,
                             })}
                             />
@@ -69,7 +82,7 @@ function AddStudent(){
                                 required: true,
                             })}
                             />
-                            <Input 
+                            {/* <Input 
                             label="subject 1"
                             type="text"
                             placeholder="Enter your first subject"
@@ -100,12 +113,15 @@ function AddStudent(){
                             {...register("faculty2", {
                                 required: true,
                             })}
-                            />
+                            /> */}
                             <Button
                             type="submit"
                             className="w-full"
                             bgColor="bg-pink-600"
-                            >Add Student</Button>
+                            onClick={() => {
+                                setFormData(getValues())
+                            }}
+                            >Add Subjects</Button>
                         </div>
                     </form>
                 </div>
@@ -114,6 +130,6 @@ function AddStudent(){
     )
 }
 // document.body.style.backgroundImage = 'url(https://www.lnmiit.ac.in/CLL/images/cll-1.jpg)';
-// document.body.style.backgroundSize = 'cover';
-
+// document.body.
+export const formData = AddStudent
 export default AddStudent

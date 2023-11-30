@@ -4,7 +4,6 @@ import config from "../config/config";
 class Service{
     client = new Client()
     databases;  
-
     constructor(){
         this.client
             .setEndpoint(config.appwriteURL)
@@ -32,6 +31,17 @@ class Service{
             return entry
         } catch (error) {
             console.log("Appwrite service :: createPost :: error", error)  
+        }
+    }
+
+    async getEntries(){
+        try {
+            return await this.databases.listDocuments(
+                config.appwriteDatabaseID,
+                config.appwriteStudentCollectionID,
+            )
+        } catch (error) {
+            console.log("Appwrite service :: getEntries :: error", error)
         }
     }
 }

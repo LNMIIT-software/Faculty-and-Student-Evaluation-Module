@@ -10,8 +10,10 @@ import store from './store/store.js'
 import AddStudent from './components/admin/AddStudents.jsx'
 import AddFaculty from './components/admin/AddFaculty.jsx'
 import AddSubject from './components/admin/AddSubjects.jsx'
-import Faculty from './components/faculty/Faculty.jsx'
-import Student from './components/student/Student.jsx'
+import FacultyHeader from './components/faculty/FacultyHeader.jsx'
+import StudentHeader from './components/student/StudentHeader.jsx'
+import DisplayStudents from './components/faculty/DisplayStudents.jsx'
+import Grades from './components/student/Grades.jsx'
 
 const router = createBrowserRouter([
   {
@@ -36,12 +38,20 @@ const router = createBrowserRouter([
   },
   {
     path: '/student',
-    element: <Student />
+    element: <StudentHeader />
   },
   {
     path: '/faculty',
-    element: <Faculty />
+    element: <FacultyHeader />
   },
+  {
+    path: '/faculty/students',
+    element: <DisplayStudents />
+  },
+  {
+    path: '/student/grades',
+    element: <Grades /> 
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(

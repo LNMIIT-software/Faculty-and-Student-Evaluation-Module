@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
+import LogoutBtn from '../LogoutButton';
+
 function AdminHeader(){
     return (
         <>
@@ -13,12 +15,12 @@ function AdminHeader(){
                             className="mr-3 h-12"
                             alt="Logo"
                         />
-                        <div className="flex items-center lg:order-2">
+                        <div className="flex items-center lg:order-2">  
                             <Link
                                 to="/"
-                                className="text-gray-800 hover:bg-orange-700 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                                className="text-gray-800 hover:bg-orange-500 hover:text-white focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                             >
-                                Log out
+                                <LogoutBtn />
                             </Link>
                         </div>
                         <div
@@ -32,9 +34,9 @@ function AdminHeader(){
                                         className={({isActive}) =>
                                             `block py-2 pr-4 pl-3 duration-200 border-b
                                             
-                                            ${isActive ? "text-orange-700" : "text-gray-700"}
+                                            ${isActive ? "text-orange-500" : "text-gray-700"}
 
-                                            border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                            border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-500 lg:p-0`
                                         }
                                     >
                                         Students
@@ -47,15 +49,15 @@ function AdminHeader(){
                                         className={({isActive}) =>
                                             `block py-2 pr-4 pl-3 duration-200 border-b
                                             
-                                            ${isActive ? "text-orange-700" : "text-gray-700"}
+                                            ${isActive ? "text-orange-500" : "text-gray-700"}
 
-                                            border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                                            border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-500 lg:p-0`
                                         }
                                     >
                                         Faculty
                                     </NavLink>
                                 </li>
-
+{/* 
                                 <li>
                                     <NavLink
                                         to="/subjects"
@@ -69,7 +71,7 @@ function AdminHeader(){
                                     >
                                         Subjects
                                     </NavLink>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>

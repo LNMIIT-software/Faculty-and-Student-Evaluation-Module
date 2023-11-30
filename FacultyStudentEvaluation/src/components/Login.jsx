@@ -23,7 +23,15 @@ function Login(){
                 console.log(userData)
                 if(userData) dispatch(authLogin(userData))
 
-                navigate('/admin')
+                if(userData.$id === '6564e49c135294ebd50b'){
+                    navigate('/admin')
+                }
+                else if(userData.$id.charAt(0) === 'f'){
+                    navigate('/faculty')
+                }
+                else{
+                    navigate('/student')
+                }
             }
         } catch (error) {
             setError(error.message)

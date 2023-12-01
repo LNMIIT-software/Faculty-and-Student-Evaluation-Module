@@ -14,6 +14,7 @@ import FacultyHeader from './components/faculty/FacultyHeader.jsx'
 import StudentHeader from './components/student/StudentHeader.jsx'
 import DisplayStudents from './components/faculty/DisplayStudents.jsx'
 import Grades from './components/student/Grades.jsx'
+import GradingByFaculty from './components/faculty/GradingByFaculty.jsx'
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: '/student/grades',
     element: <Grades /> 
+  },
+  {
+    path: '/faculty/grades',
+    element: <GradingByFaculty />
   }
 ])
 

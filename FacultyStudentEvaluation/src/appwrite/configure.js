@@ -44,6 +44,25 @@ class Service{
             console.log("Appwrite service :: getEntries :: error", error)
         }
     }
+
+    async updateEntry(slug, studentID, studentName, subject, facultyName, grade){
+        try {
+            return await this.databases.updateDocument(
+                config.appwriteDatabaseID,
+                config.appwriteStudentCollectionID,
+                slug,
+                {
+                    studentID, 
+                    studentName, 
+                    subject, 
+                    facultyName, 
+                    grade
+                }
+            )
+        } catch (error) {
+            console.log("Appwrite service :: updatePost :: error", error)
+        }
+    }
 }
 
 const service = new Service()

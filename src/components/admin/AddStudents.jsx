@@ -22,8 +22,6 @@ function AddStudent(){
     const [hasErrors, setHasErrors] = useState(false);
 
     const onSubmit = async (data) => {
-
-        // If there are errors, do not proceed with form submission
         if (hasErrors) {
         NotifyError("Form submission failed. Please fix the errors.");
         return;
@@ -36,36 +34,66 @@ function AddStudent(){
     const [error, setError] = useState('')
     const [formData, setFormData] = useState({})
 
-    const signup = async(data) => {
-        console.log(data)
-        setFormData(data)
-        console.log("this is the formData")
-        console.log(formData)
-        setError('')
+    const signup = async (data) => {
+        console.log(data);
+        setFormData(data);
+        console.log("this is the formData");
+        console.log(formData);
+        setError('');
+    
         try {
             if (hasErrors) {
                 NotifyError("Form submission failed. Please fix the errors.");
                 return;
             }
-
-            const session = await authService.createAccount(data)
-            console.log("ye hai signup function")
-            console.log(session)
-            
-            if(session){
-                navigate('/admin/add-student/add-subject', {state: formData})
+    
+            const isExistingStudent = await checkExistingStudent(data);
+    
+            if (isExistingStudent) {
+                return; 
             }
-            // try {
-            //     console.log({id, username, subject1, faculty1})
-            //     const entry = await service.addEntry({id, username, subject1, faculty1})
-            //     console.log(entry)
-            // } catch (error) {
-            //     setError(error.message)
-            // }
+    
+           
+            const session = await authService.createAccount(data);
+            console.log("ye hai signup function");
+            console.log(session);
+    
+            if (session) {
+                navigate('/admin/add-student/add-subject', { state: formData });
+            }
         } catch (error) {
-            setError(error.message)
+            // Handle errors
+            console.error("Error during signup:", error);
+            const errorMessage = error.message || "An error occurred during signup.";
+            setError(errorMessage);
         }
-    }
+    };
+    
+    const checkExistingStudent = async (data) => {
+        try {
+            const existingStudentByEmail = await authService.account.list({
+                email: data.email,
+            });
+    
+            if (existingStudentByEmail.users.length > 0) {
+                NotifyError("A student with this email already exists!");
+                return true; 
+            }
+    
+            
+            const existingStudentById = await authService.account.get(data.id);
+    
+            if (existingStudentById) {
+                NotifyError("A student with this ID already exists!");
+                return true; 
+            }
+    
+            return false;
+        } catch (error) {
+            console.error("Error checking existing student:", error);
+            return false;
+        }
+    };
 
     return (
         <div className="bg-gradient-to-tr from-violet-300 to-pink-300  h-fit-content">
@@ -99,11 +127,10 @@ function AddStudent(){
 
                                     if (!onlyLettersRegex.test(value)) {
                                         NotifyError("Invalid input for name! Only string input allowed.");
-                                        setHasErrors(true); // Set the state to indicate validation errors
-                                        return false; // Return false to indicate validation failure
+                                        setHasErrors(true); 
                                     }
 
-                                    setHasErrors(false); // Set the state to indicate no validation errors
+                                    setHasErrors(false); 
                                     return true;
                                 },
                             })}
@@ -124,38 +151,7 @@ function AddStudent(){
                                 required: true,
                             })}
                             />
-                            {/* <Input 
-                            label="subject 1"
-                            type="text"
-                            placeholder="Enter your first subject"
-                            {...register("subject1", {
-                                required: true,
-                            })}
-                            />
-                            <Input 
-                            label="faculty"
-                            type="text"
-                            placeholder="Enter the faculty"
-                            {...register("faculty1", {
-                                required: true,
-                            })}
-                            />
-                            <Input 
-                            label="subject 2"
-                            type="text"
-                            placeholder="Enter your second subject"
-                            {...register("subject 1", {
-                                required: true,
-                            })}
-                            />
-                            <Input 
-                            label="faculty"
-                            type="text"
-                            placeholder="Enter the faculty"
-                            {...register("faculty2", {
-                                required: true,
-                            })}
-                            /> */}
+                            
                             <Button
                             type="submit"
                             className="w-full"
@@ -171,7 +167,7 @@ function AddStudent(){
         </div>
     )
 }
-// document.body.style.backgroundImage = 'url(https://www.lnmiit.ac.in/CLL/images/cll-1.jpg)';
-// document.body.
+
+
 export const formData = AddStudent
 export default AddStudent

@@ -15,9 +15,6 @@ import StudentHeader from './components/student/StudentHeader.jsx'
 import DisplayStudents from './components/faculty/DisplayStudents.jsx'
 import Grades from './components/student/Grades.jsx'
 import GradingByFaculty from './components/faculty/GradingByFaculty.jsx'
-import AddFeedback from './components/student/AddFeedback.jsx'
-import FeedbackForm from './components/student/FeedbackForm.jsx'
-import ViewFeedback from './components/faculty/ViewFeedback.jsx'
 
 const router = createBrowserRouter([
   {
@@ -59,18 +56,6 @@ const router = createBrowserRouter([
   {
     path: '/faculty/grades',
     element: <GradingByFaculty />
-  },
-  {
-    path: '/student/feedback',
-    element: <AddFeedback />
-  },
-  {
-    path: '/student/:id',
-    element: <FeedbackForm />
-  },
-  {
-    path: '/faculty/view-feedback',
-    element: <ViewFeedback />
   }
 ])
 

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 import LogoutBtn from '../LogoutButton';
 import { useSelector } from 'react-redux';
 
+
 function FacultyHeader(){
     const userData = useSelector(state => state.auth.userData)
     // console.log(userData)

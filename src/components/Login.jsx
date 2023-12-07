@@ -23,7 +23,7 @@ function Login(){
                 console.log(userData)
                 if(userData) dispatch(authLogin(userData))
 
-                if(userData.$id === '6570c5901c8e157ce59a'){
+                if(userData.$id === '656e144f08f0e68f1889'){
                     navigate('/admin')
                 }
                 else if(userData.$id.charAt(0) === 'f'){

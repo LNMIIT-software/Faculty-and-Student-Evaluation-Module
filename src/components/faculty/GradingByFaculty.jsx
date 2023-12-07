@@ -3,13 +3,40 @@ import service from "../../appwrite/configure";
 import { useSelector } from "react-redux";
 import authSlice from "../../store/authSlice";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+// Notification Toast - Error
+function NotifyError(){
+    toast.error("Invalid Grade!", {
+        position: toast.POSITION.TOP_LEFT
+    });
+}
+
+// Notification Toast - Success
+function NotifySuccess(){
+    toast.success("Grade Added Successfully!", {
+        position: toast.POSITION.TOP_LEFT
+    });
+}
+
+
 function GradingByFaculty() {
     const [entries, setEntries] = useState([])
     const userData = useSelector(state => state.auth.userData)
     const [subjects, setSubjects] = useState([])
     const [currGrade, setCurrGrade] = useState()
 
+    // To handle the invalid Grade input.
+    const [invalidGradeAttempt, setInvalidGradeAttempt] = useState(false)
+
     //const keysToShow =  Object.keys(entries[0]).slice(0,5)
+
+    const isValidGrade = (grade) => {
+        const validGrades = ["A", "B", "AB", "C", "BC", "D", "F"];
+        return validGrades.includes(grade);
+    };
+
 
     useEffect(() => {
         service.getEntries([])
@@ -47,6 +74,9 @@ function GradingByFaculty() {
     return (
         <div>
             {/* {console.log(subjects)} */}
+
+            <ToastContainer />
+
             {subjects.map((subject, subjectIndex) => (
                 <div key={subjectIndex} className="mb-4">
                     <h2 className="text-xl font-semibold mb-2">{subject} Table</h2>
@@ -84,11 +114,22 @@ function GradingByFaculty() {
                                                 // You can handle the input value using state or any other mechanism
                                                 />
                                                 <button
-                                                    className="p-1 ml-2 text-green-500"
-                                                    onClick={() => handleButtonClick(item)}
-                                                >
-                                                    ✅
-                                                </button>
+                                                className="p-1 ml-2 text-green-500"
+
+                                                onClick={() => {
+                                                    if (currGrade !== "" && isValidGrade(currGrade)) {
+                                                        handleButtonClick(item);
+                                                        // Updated: Added a Success toast
+                                                        NotifySuccess();
+                                                    } else {
+                                                        // Updated: Added an Error toast
+                                                        NotifyError();
+                                                    }
+                                                }}
+                                            >
+                                                ✅
+                                            </button>
+
                                                 {/* <button
                                                     className="p-1 ml-2 text-green-500"
                                                     onClick={() => handleDelete(item)}

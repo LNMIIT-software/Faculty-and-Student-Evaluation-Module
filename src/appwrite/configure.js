@@ -34,27 +34,6 @@ class Service{
         }
     }
 
-    async addFeedbackEntry(facultyName, rating, subject, facultyFeedback){
-        console.log(facultyName, rating, subject, facultyFeedback)
-        try {
-            const entry = await this.databases.createDocument(
-                config.appwriteDatabaseID,
-                config.appwriteFeedbackCollectionID,
-                ID.unique(),
-                {
-                    facultyName,
-                    rating,
-                    subject,
-                    facultyFeedback
-                }
-            )
-            console.log(entry)
-            return entry
-        } catch (error) {
-            console.log("Appwrite service :: createPost :: error", error)
-        }
-    }
-
     async getEntries(){
         try {
             return await this.databases.listDocuments(
@@ -63,17 +42,6 @@ class Service{
             )
         } catch (error) {
             console.log("Appwrite service :: getEntries :: error", error)
-        }
-    }
-
-    async getFeedbackEntries(){
-        try {
-            return await this.databases.listDocuments(
-                config.appwriteDatabaseID,
-                config.appwriteFeedbackCollectionID
-            )
-        } catch (error) {
-            console.log("Appwrite service :: getFeedbackEntries :: error", error)
         }
     }
 

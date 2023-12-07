@@ -66,7 +66,7 @@ function Login(){
   
 
     return (
-        <div className="bg-gradient-to-tr from-violet-300 to-pink-300  h-screen">
+        <div>
             <div className='flex items-center justify-center w-full pt-14'>
                 <div className={` w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
                     <h2 className="text-center text-2xl font-bold leading-tight">Log in to your account</h2>
@@ -102,7 +102,8 @@ function Login(){
         </div>
     )
 }
-// document.body.style.backgroundImage = 'url(https://www.lnmiit.ac.in/CLL/images/cll-1.jpg)';
-// document.body.style.backgroundSize = 'cover';
+
+document.body.style.backgroundImage = 'url(https://www.orchidfoundation.info/sites/default/files/2021-03/The%20LNM%20Institute%20of%20Information%20Technology%20-%20%5BLNMIIT%5D%2C%20Jaipur.png)';
+document.body.style.backgroundSize = 'cover';
 
 export default Login

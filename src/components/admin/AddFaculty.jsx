@@ -19,17 +19,10 @@ function AddFaculty(){
     const [hasErrors, setHasErrors] = useState(false);
 
     const onSubmit = async (data) => {
-        // Your form submission logic here
-        // ...
-
-        // If there are errors, do not proceed with form submission
         if (hasErrors) {
             NotifyError("Form submission failed. Please fix the errors.");
             return;
         }
-
-        // Proceed with form submission logic
-        // ...
     };
 
 
@@ -82,16 +75,16 @@ function AddFaculty(){
                             {...register("username", {
                                 required: true,
                                 validate: (value) => {
-                                    // Regular expression to check for only string inputs.
+                                   
                                     const onlyLettersRegex = /^[A-Za-z\s]+$/;
 
                                     if (!onlyLettersRegex.test(value)) {
                                         NotifyError("Invalid input for name! Only string input allowed.");
-                                        setHasErrors(true); // Set the state to indicate validation errors
-                                        return false; // Return false to indicate validation failure
+                                        setHasErrors(true);
+                                        return false; 
                                     }
 
-                                    setHasErrors(false); // Set the state to indicate no validation errors
+                                    setHasErrors(false);
                                     return true;
                                 },
                             })}
